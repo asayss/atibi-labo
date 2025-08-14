@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دليل المختبرات الطبية - المغرب</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            min-height: 100vh;
+            padding: 10px;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding: 20px;
+            background: linear-gradient(135deg, #1976d2, #2196f3);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(25, 118, 210, 0.3);
+        }
+
+        .header-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 15px;
+            background: white;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 1;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .header-icon img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+        }
+
+        .header-icon:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .header-text {
+            text-align: center;
+            flex: 1;
+        }
+
+        .header-text h1 {
+            color: white;
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .header-text p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 14px;
+        }
+
+        .header-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+
+        .home-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            color: white;
+            padding: 8px;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+        }
+
+        .home-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.6);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .register-btn-top {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            white-space: nowrap;
+        }
+
+        .register-btn-top:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.6);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .search-section {
+            margin-bottom: 20px;
+        }
+
+        .search-box {
+            position: relative;
+            display: flex;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #e1f5fe;
+            border-radius: 25px;
+            font-size: 16px;
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #2196f3;
+            box-shadow: 0 0 10px rgba(33, 150, 243, 0.3);
+        }
+
+        .search-btn {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #2196f3, #1976d2);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .search-btn:hover {
+            background: linear-gradient(135deg, #1976d2, #0d47a1);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.4);
+        }
+
+        .city-filter {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+            position: relative;
+        }
+
+        .city-btn {
+            padding: 6px 12px;
+            background: white;
+            border: 2px solid #e1f5fe;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #1976d2;
+            font-weight: 600;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .city-btn:hover, .city-btn.active {
+            background: linear-gradient(135deg, #2196f3, #1976d2);
+            border-color: #2196f3;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .more-cities-btn {
+            padding: 6px 12px;
+            background: white;
+            border: 2px solid #e1f5fe;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #1976d2;
+            font-weight: 600;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .more-cities-btn:hover {
+            background: linear-gradient(135deg, #2196f3, #1976d2);
+            border-color: #2196f3;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .hidden-cities {
+            display: none;
+            gap: 8px;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+
+        .hidden-cities.show {
+            display: flex;
+        }
+
+        .pharmacy-card {
+            background: white;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 4px solid #2196f3;
+        }
+
+        .pharmacy-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .pharmacy-info {
+            padding: 20px;
+        }
+
+        .pharmacy-name {
+            font-size: 20px;
+            font-weight: bold;
+            color: #0d47a1;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pharmacy-name::before {
+            content: "💊";
+            font-size: 18px;
+        }
+
+        .pharmacy-address {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+            line-height: 1.4;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .pharmacy-address::before {
+            content: "📍";
+            font-size: 14px;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 10px 8px;
+            border: none;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            min-height: 40px;
+        }
+
+        .btn-directions {
+            background: linear-gradient(135deg, #2196f3, #1976d2);
+            color: white;
+        }
+
+        .btn-directions:hover {
+            background: linear-gradient(135deg, #1976d2, #0d47a1);
+            transform: translateY(-2px);
+        }
+
+        .btn-phone {
+            background: linear-gradient(135deg, #4caf50, #388e3c);
+            color: white;
+        }
+
+        .btn-phone:hover {
+            background: linear-gradient(135deg, #388e3c, #2e7d32);
+            transform: translateY(-2px);
+        }
+
+        .icon {
+            font-size: 14px;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666;
+            font-size: 16px;
+        }
+
+        @media (max-width: 400px) {
+            .container {
+                padding: 5px;
+            }
+
+            .header {
+                padding: 15px;
+            }
+
+            .header-icon {
+                width: 50px;
+                height: 50px;
+            }
+
+            .header-icon img {
+                width: 40px;
+                height: 40px;
+            }
+
+            .header-text h1 {
+                font-size: 20px;
+            }
+
+            .header-text p {
+                font-size: 12px;
+            }
+
+            .home-btn {
+                width: 35px;
+                height: 35px;
+                font-size: 16px;
+            }
+
+            .register-btn-top {
+                font-size: 11px;
+                padding: 5px 10px;
+            }
+            
+            .pharmacy-name {
+                font-size: 18px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .btn {
+                margin-bottom: 0;
+                font-size: 14px;
+                padding: 12px;
+            }
+
+            .city-filter {
+                gap: 5px;
+            }
+
+            .city-btn, .more-cities-btn {
+                font-size: 11px;
+                padding: 5px 8px;
+            }
+
+            .hidden-cities {
+                margin-top: 8px;
+                gap: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-icon" onclick="goBack()">
+                <img src="data/icon.png" alt="أيقونة الطبي">
+            </div>
+            <div class="header-text">
+                <h1>دليل مختبرات التحاليل الطبية</h1>
+                <p>المغرب</p>
+            </div>
+            <div class="header-controls">
+                <div class="home-btn" onclick="goBack()">
+                    🏠
+                </div>
+                <a href="#" class="register-btn-top" onclick="openRegistrationForm()">
+                    طلب إضافة مختبر
+                </a>
+            </div>
+        </div>
+
+        <div class="search-section">
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="ابحث عن مختبر..." id="searchInput">
+                <button class="search-btn" onclick="performSearch()">
+                    🔍
+                </button>
+            </div>
+            
+            <div class="city-filter">
+                <button class="city-btn active" data-city="الكل">الكل</button>
+                <button class="city-btn" data-city="الدار البيضاء">الدار البيضاء</button>
+                <button class="city-btn" data-city="أكادير">أكادير</button>
+                <button class="city-btn" data-city="الرباط">الرباط</button>
+                <button class="more-cities-btn" onclick="toggleMoreCities()">...</button>
+                
+                <div class="hidden-cities" id="hiddenCities">
+                    <button class="city-btn" data-city="فاس">فاس</button>
+                    <button class="city-btn" data-city="مراكش">مراكش</button>
+                    <button class="city-btn" data-city="طنجة">طنجة</button>
+                    <button class="city-btn" data-city="مكناس">مكناس</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="pharmaciesList">
+            <!-- Pharmacy Cards will be inserted here -->
+        </div>
+
+        <div id="noResults" class="no-results" style="display: none;">
+            لا توجد نتائج مطابقة للبحث
+        </div>
+    </div>
+
+    <script>
+        const pharmacies = [
+            {
+                name: "مختبر الحرية للتحاليل الطبية",
+                address: "عمارة الحرية ، المدخل الجنوبي ، بجانب محطة سيارات الأجرة - إنزكان",
+                phone: "+212 528 33 19 23 ",
+                coordinates: "عمارة الحرية ، المدخل الجنوبي ، بجانب محطة سيارات الأجرة - إنزكان",
+                city: "أكادير"
+            },
+            {
+                name: "الدكتور نعومي عادل مختبر التحليلات الطبية",
+                address: "طريق مولاي التهامي، الطابق الأول، رقم 1. مدينة الرحمة. دار بوعزة. الرحمة 20660 الدار البيضاء المغرب",
+                phone: " +212 522 01 33 22 ",
+                coordinates: "طريق مولاي التهامي، الطابق الأول، رقم 1. مدينة الرحمة. دار بوعزة. الرحمة 20660 الدار البيضاء المغرب",
+                city: "الدار البيضاء"
+            },
+            {
+                name: "الدكتورة امل الجفالي",
+                address: "LIGUE NATIONALE DE LUTTE  الرباط المغرب",
+                phone: " +212 667 87 71 25 ",
+                coordinates: "LIGUE NATIONALE DE LUTTE 10000 الرباط المغرب",
+                city: "الرباط"
+            },
+            {
+                name: "جعفر لخصاصي ",
+                address: "Rond-Point Atlas, prés de Station Total et Madame Mika, Bureaux al Madina 3, Fes Fes Atlas  فاس المغرب",
+                phone: "+212 535 62 89 34",
+                coordinates: "Rond-Point Atlas, prés de Station Total et Madame Mika, Bureaux al Madina 3, Fes Fes Atlas 30003 فاس المغرب",
+                city: "فاس"
+
+            }
+        ];
+
+        let currentCity = "الكل";
+
+        // دالة للرجوع للصفحة السابقة
+        function goBack() {
+            if (window.history.length > 1) {
+                window.history.back();
+            } else {
+                window.close();
+            }
+        }
+
+        // دالة لفتح نموذج التسجيل
+        function openRegistrationForm() {
+            // سيتم استبدال هذا الرابط برابط نموذج Google Forms الفعلي
+            const registrationUrl = "https://asayss.github.io/pharma-registr/";
+            // فتح في نفس النافذة للحفاظ على أبعاد التطبيق
+            window.open(registrationUrl, '_blank', 'width=480,height=800,scrollbars=yes,resizable=yes');
+        }
+
+        // دالة لإظهار/إخفاء المدن الإضافية
+        function toggleMoreCities() {
+            const hiddenCities = document.getElementById('hiddenCities');
+            const moreBtn = document.querySelector('.more-cities-btn');
+            
+            if (hiddenCities.classList.contains('show')) {
+                hiddenCities.classList.remove('show');
+                moreBtn.textContent = '...';
+            } else {
+                hiddenCities.classList.add('show');
+                moreBtn.textContent = 'أقل';
+            }
+        }
+
+        // دالة لتطبيع النص للبحث (إزالة الهمزات والتشكيل)
+        function normalizeText(text) {
+            return text
+                .replace(/[أإآا]/g, 'ا')
+                .replace(/[ؤو]/g, 'و')
+                .replace(/[ئي]/g, 'ي')
+                .replace(/[ة]/g, 'ه')
+                .replace(/[ًٌٍَُِّْ]/g, '')
+                .toLowerCase();
+        }
+
+        // دالة لترتيب الأسماء العربية أبجدياً
+        function sortPharmaciesAlphabetically(pharmacies) {
+            return [...pharmacies].sort((a, b) => {
+                // استخراج الاسم الأول بعد "صيدلية"
+                const nameA = a.name.replace(/^صيدلية\s+/, '').trim();
+                const nameB = b.name.replace(/^صيدلية\s+/, '').trim();
+                
+                return nameA.localeCompare(nameB, 'ar', { sensitivity: 'base' });
+            });
+        }
+
+        function createPharmacyCard(pharmacy) {
+            return `
+                <div class="pharmacy-card">
+                    <div class="pharmacy-info">
+                        <div class="pharmacy-name">${pharmacy.name}</div>
+                        <div class="pharmacy-address">${pharmacy.address}</div>
+                        <div class="action-buttons">
+                            <a href="https://www.google.com/maps/dir/?api=1&destination=${pharmacy.coordinates}" 
+                               target="_blank" class="btn btn-directions">
+                                <span class="icon">🗺️</span>
+                                اتجاهات
+                            </a>
+                            <a href="tel:${pharmacy.phone}" class="btn btn-phone">
+                                <span class="icon">📞</span>
+                                اتصال
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function displayPharmacies(pharmaciesToShow) {
+            const pharmaciesList = document.getElementById('pharmaciesList');
+            const noResults = document.getElementById('noResults');
+            
+            if (pharmaciesToShow.length === 0) {
+                pharmaciesList.innerHTML = '';
+                noResults.style.display = 'block';
+            } else {
+                noResults.style.display = 'none';
+                pharmaciesList.innerHTML = pharmaciesToShow.map(pharmacy => createPharmacyCard(pharmacy)).join('');
+            }
+        }
+
+        function filterPharmacies() {
+            const searchTerm = document.getElementById('searchInput').value;
+            const normalizedSearchTerm = normalizeText(searchTerm);
+            
+            let filtered = pharmacies.filter(pharmacy => {
+                const cityMatch = currentCity === "الكل" || pharmacy.city === currentCity;
+                
+                if (!searchTerm) return cityMatch;
+                
+                const normalizedName = normalizeText(pharmacy.name);
+                const normalizedAddress = normalizeText(pharmacy.address);
+                
+                const searchMatch = normalizedName.includes(normalizedSearchTerm) ||
+                                   normalizedAddress.includes(normalizedSearchTerm);
+                
+                return cityMatch && searchMatch;
+            });
+            
+            displayPharmacies(sortPharmaciesAlphabetically(filtered));
+        }
+
+        function performSearch() {
+            filterPharmacies();
+        }
+
+        // Initialize the page with alphabetically sorted pharmacies
+        const sortedPharmacies = sortPharmaciesAlphabetically(pharmacies);
+        displayPharmacies(sortedPharmacies);
+
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('input', filterPharmacies);
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+
+        // إضافة event listeners بعد تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            // City filter functionality - للأزرار جميعها (الأساسية والمخفية)
+            function addCityButtonListeners() {
+                document.querySelectorAll('.city-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        document.querySelectorAll('.city-btn').forEach(b => b.classList.remove('active'));
+                        this.classList.add('active');
+                        currentCity = this.dataset.city;
+                        filterPharmacies();
+                    });
+                });
+            }
+
+            // تشغيل الدالة في البداية
+            addCityButtonListeners();
+
+            // إعادة تشغيل الدالة عند إظهار المدن المخفية
+            const originalToggle = window.toggleMoreCities;
+            window.toggleMoreCities = function() {
+                originalToggle();
+                // إعادة إضافة listeners للأزرار الجديدة
+                setTimeout(addCityButtonListeners, 100);
+            };
+
+            // Add animations
+            const cards = document.querySelectorAll('.pharmacy-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.5s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>
